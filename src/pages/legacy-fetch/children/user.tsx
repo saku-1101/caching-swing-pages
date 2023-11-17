@@ -1,29 +1,21 @@
 import { User } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { useRouter } from "next/router";
+import { FormEvent } from "react";
 
-export const Person = ({
-  user,
-  setter,
-}: {
-  user: User | undefined;
-  setter: Dispatch<SetStateAction<User | undefined>>;
-}) => {
+export const Person = ({ user }: { user: User | undefined }) => {
   const router = useRouter();
   async function handleUpdateUserName(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const res = await fetch("/api/update/user", {
+    await fetch("/api/update/user", {
       method: "POST",
       body: JSON.stringify({
         name: data.get("name"),
       }),
     });
 
-    const user = await res.json();
-    setter(user);
-    router.refresh();
+    router.reload();
   }
   if (!user) return <div>User is not defined.</div>;
   return (
