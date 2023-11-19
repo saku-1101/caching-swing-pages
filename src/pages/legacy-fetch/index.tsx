@@ -22,9 +22,9 @@ export default function LegacyFetchPage() {
       fetcher("https://api.github.com/repos/vercel/next.js"),
       fetcher("/api/get/unstable/data"),
       fetcher("/api/get/user"),
-    ]).then(([data, number, user]) => {
+    ]).then(([data, randomNumber, user]) => {
       setData(data);
-      setRandomNumber(number.randomNumber);
+      setRandomNumber(randomNumber.randomNumber);
       setUser(user);
     });
   }, []);

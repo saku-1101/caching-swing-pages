@@ -12,7 +12,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       }}
     >
       <h1 className="text-3xl font-extrabold">
-        This is <strong className="text-red-500">NOT</strong> App Router!
+        This is <strong className="text-red-500">SSR</strong> but{" "}
+        <strong className="text-red-500">NOT</strong> App Router!
       </h1>
       {children}
     </main>
