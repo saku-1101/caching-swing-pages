@@ -12,7 +12,7 @@ import { assertNonNullable } from "@/libs/assert";
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
     },
   }).then((res) => res.json());
 
@@ -58,8 +58,8 @@ export async function getServerSideProps() {
 
   const props = Promise.all([
     fetcher("https://api.github.com/repos/vercel/next.js"),
-    getRandomNumber(),
-    getUser(),
+    fetcher(`${process.env.BASE_URL}/api/get/unstable/data`),
+    fetcher(`${process.env.BASE_URL}/api/get/user`),
   ])
     .then(([data, randomNumber, user]) => {
       console.timeEnd("ssr");
